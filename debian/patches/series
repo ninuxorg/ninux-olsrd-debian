@@ -1,0 +1,9 @@
+100-debug_level.patch
+110-build_fix.patch
+111-build-mips-and-armhf.patch
+230-usr-lib-olsrd.patch
+260-quagga-plugin-detect-protocol-version.patch
+270-gui-linux-gtk-align-olsr_ip_addr-to-olsr-definition-of-it.patch
+280-fix-linux-gtk-build.patch
+290-hardcode-etc-olsrd-olsrd-conf.patch
+300-fix-stack-corruption-in-net-output.patch

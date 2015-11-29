@@ -1,0 +1,13 @@
+--- olsrd-0.6.1.orig/lib/quagga/src/quagga.h	2010-03-31 19:03:53.000000000 +0200
++++ olsrd-0.6.1/lib/quagga/src/quagga.h	2011-05-03 15:46:54.000000000 +0200
+@@ -32,6 +32,10 @@
+ int zebra_delroute(const struct rt_entry *);
+ void zebra_redistribute(uint16_t cmd);
+ 
++#ifndef ZEBRA_HEADER_MARKER
++#define ZEBRA_HEADER_MARKER 255
++#endif
++
+ /*
+  * Local Variables:
+  * c-basic-offset: 2

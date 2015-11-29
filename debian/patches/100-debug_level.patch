@@ -1,0 +1,11 @@
+--- olsrd-0.6.1.orig/files/olsrd.conf.default.rfc	2010-03-31 19:03:53.000000000 +0200
++++ olsrd-0.6.1/files/olsrd.conf.default.rfc	2011-05-03 15:26:54.000000000 +0200
+@@ -20,7 +20,7 @@
+ # If set to 0 the daemon runs in the background, unless "NoFork" is set to true
+ # (Default is 1)
+ 
+-# DebugLevel  1
++DebugLevel  0
+ 
+ # IP version to use (4 or 6)
+ # (Default is 4)
