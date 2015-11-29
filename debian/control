@@ -52,6 +52,6 @@ Description: various plugins to enhance olsrd
   * mini          - minimal example plugin (demo)
   * dyn_gw_plain  - dyn_gw without ping/libthread
   * arprefresh    - optimize kernel arp cache from olsr UDP sniffing
-  * mdnsp         - multicast DNS via OLSR mesh network
+  * mdns          - multicast DNS via OLSR mesh network
   * p2pd          - distribute P2P Discovery messages
 
