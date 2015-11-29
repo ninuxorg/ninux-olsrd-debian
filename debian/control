@@ -1,7 +1,7 @@
 Source: olsrd
 Section: net
 Priority: extra
-Maintainer: Roland Stigge <stigge@antcom.de>
+Maintainer: Claudio Pisa <clauz@ninux.org>
 Build-Depends: debhelper (>= 9),
                bison,
                flex,
