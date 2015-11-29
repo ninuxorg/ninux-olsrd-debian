@@ -26,11 +26,6 @@ override_dh_auto_install:
 	install -d $(CURDIR)/debian/olsrd/usr/share/doc/olsrd/examples
 	install -p -m0644 files/olsrd.conf.[a-z]* \
 		$(CURDIR)/debian/olsrd/usr/share/doc/olsrd/examples
-# provide better default config
-	install -p -m0644 $(CURDIR)/debian/olsrd.conf \
-		$(CURDIR)/debian/olsrd/etc/olsrd/olsrd.conf
-	install -p -m0644 $(CURDIR)/debian/olsrd-default \
-		$(CURDIR)/debian/olsrd/etc/default/olsrd
 
 override_dh_compress:
 	# compress, but don't compress README_NAMESERVICE, for consistency reasons
