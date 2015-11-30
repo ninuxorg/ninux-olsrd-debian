@@ -43,20 +43,16 @@ explained in detail in /usr/share/doc/olsrd-plugins:
 - secure	- secure OLSR routing with a shared key
 - nameservice	- announce hostnames and dns servers
 - bmf 		- basic multicast forwarding plugin for olsrd
-- txtinfo
-
-The following plugins are not included in the olsrd-plugins binary package:
-
-- quagga	- quagga plugin
-- tas		- (not at all) tiny application server, no useful apps exist
-- powerinfo	- displays /proc/apm on 127.0.0.1:8888
-- pgraph	- obsoleted by httpinfo and dot-draw
-- mini		- minimal example plugin, useful as a howto for writing plugins
-
-If you need them, you can easily build them from the debian source package 
-yourself: define which (additional) plugins you want in debian/rules, and 
-rebuild the package. And if you tell me a good reason why they should be 
-included in the binary package, I'll be glad to add them :)
+- quagga    - import external routes from quagga
+- txtinfo   - display information about the OSLR node
+- pgraph    - performance graph
+- watchdog  - detection of olsrd freeze
+- tas       - tiny application server
+- mini      - minimal example plugin (demo)
+- dyn_gw_plain  - dyn_gw without ping/libthread
+- arprefresh    - optimize kernel arp cache from olsr UDP sniffing
+- mdns      - multicast DNS via OLSR mesh network
+- p2pd      - distribute P2P Discovery messages
 
 
 About this package
@@ -72,8 +68,5 @@ http://olsrexperiment.de/sven-ola/nylon/packages/olsrd/files/olsrd.conf-sven-ola
 and has been successfully used in the freifunk networks in Berlin and Hamburg
 (Germany).
 
-The plugins are installed in /usr/lib/olsrd/ which differs from the upstream 
-default /usr/lib/.
-
-
  -- Holger Levsen <holger@debian.org>  Tue,  8 Jul 2008 18:09:15 +0200
+ -- Claudio Pisa <clauz@ninux.org>  Mon,  30 Nov 2015 11:44:08 +0100
