@@ -1,4 +1,4 @@
-This repository contains an HowTo, scripts, and config files to build an olsrd routing daemon package for mips, which is the architecture used by some routers such as the ubiquiti edgerouter.
+This repository contains an HowTo, scripts, and config files to build an olsrd routing daemon package for mips/mips64, which is the architecture used by some routers such as the ubiquiti edgerouter.
 
 The motivation for this is that the packages provided officially by debian are **very** outdated.
 
