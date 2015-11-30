@@ -33,7 +33,7 @@ And install debian using the installer.
 Launch the debian qemu-mips64 virtual machine
 ---------------------------------------------
 
-After finishing the installation, we need to copy the kernel and the initrd outside the virtual machine.
+After finishing the installation, we need to copy the kernel and the initrd from the ``/boot/`` directory to outside the virtual machine.
 
 To transfer them out you can use an ``scp`` through the network to another machine, for example.
 
