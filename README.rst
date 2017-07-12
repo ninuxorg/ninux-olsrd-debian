@@ -1,6 +1,6 @@
 This repository contains an HowTo, scripts, and config files to build an olsrd routing daemon package for mips/mips64, which is the architecture used by some routers such as the ubiquiti edgerouter.
 
-The motivation for this is that the packages provided officially by debian are **very** outdated.
+The motivation for this is that the olsrd packages provided officially by debian are **very** outdated.
 
 We will set-up a qemu mips64 vritual machine and then use it to build an olsrd .deb package.
 
@@ -22,24 +22,38 @@ Launch the virtual machine::
     qemu-system-mips64 \
         -M malta \
         -hda /tmp/disk.img \
-        -kernel wheezy/vmlinux-3.2.0-4-4kc-malta \
-        -initrd wheezy/initrd.gz \
+        -kernel vmlinux-3.2.0-4-4kc-malta \
+        -initrd initrd.gz \
         -append "console=ttyS0" \
         -nographic 
 
 And install debian using the installer.
 
+After finishing the installation the system will reboot and you will be prompted again with the language selection dialog. Follow the instructions below. 
+
 
 Launch the debian qemu-mips64 virtual machine
 ---------------------------------------------
 
-After finishing the installation, we need to copy the kernel and the initrd from the ``/boot/`` directory to outside the virtual machine.
+Press ESC and then select "Configure the network".
 
-To transfer them out you can use an ``scp`` through the network to another machine, for example.
+When prompted with the debian mirror selection dialog, press again ESC and then select "Execute a shell".
 
-Note that the kernel and initrd files are different from the installation ones used above.
+We need to copy the installed kernel and initrd from the ``/boot/`` directory of the VM to the host.
 
-Lauch the debian qemu-mips64 virtual machine::
+Mount the disk to /mnt and chroot::
+
+    mount /dev/sda1 /mnt
+    chroot /mnt/ bash
+
+To transfer them out you can use an ``scp`` command through the network to another machine. For example::
+
+    scp /boot/vmlinux-3.2.0-4-5kc-malta myhostname:/tmp/
+    scp /boot/initrd.img-3.2.0-4-5kc-malta myhostname:/tmp/
+
+Exit the virtual machine window using ctrl-a,x.
+
+Lauch the debian qemu-mips64 virtual machine (note that the kernel and initrd files are different from the installation ones used above)::
 
     qemu-system-mips64 \
         -M malta \
@@ -58,21 +72,22 @@ Build the debian package from inside the debian qemu-mips64 virtual machine
 
 After launching the debian qemu-mips64 virtual machine as described above, install some build dependencies::
 
-   apt-get install build-essential devscripts devhelper flex bison
+   apt-get update
+   apt-get install build-essential devscripts debhelper flex bison pkg-config
   
 Download the olsrd tarball for which you want to build the debian package::
 
    wget http://www.olsr.org/releases/0.9/olsrd-0.9.0.3.tar.gz
   
-Rename the olsrd tarball according to the debian's way::
+Check the checksum and then rename the olsrd tarball according to the debian's way::
 
    mv olsrd-0.9.0.3.tar.gz olsrd_0.9.0.3.orig.tar.gz
   
-and extract it::
+Extract it::
 
    tar xf olsrd_0.9.0.3.orig.tar.gz
   
-Get the ``debian/`` directory with some ninux-targeted customizations (contained in this repository and described below)::
+Download the ``debian/`` directory with some ninux-targeted customizations (contained in this repository and described below)::
 
    wget https://github.com/ninuxorg/ninux-olsrd-debian/archive/master.tar.gz -O ninux-olsrd-debian.tar.gz
 
@@ -88,7 +103,7 @@ Move the ``debian/`` directory to the directory with the olsrd sources and cd to
 Update the debian ``changelog`` with the ``dch`` tool (e.g. the ``-v`` option updates the version in the changelog)::
 
    export EDITOR=vim
-   dch -v
+   dch -v 0.9.0.3
   
 Edit the ``control`` file, if needed::
 
@@ -97,6 +112,12 @@ Edit the ``control`` file, if needed::
 Build the debian packages (from inside the debian directory)::
 
    debuild -us -uc 
+
+If the build is successful the .deb files will be in the parent directory.
+We can transfer them through scp::
+
+   scp ../../olsrd_0.9.0.3_mips.deb myhostname:/tmp/
+   scp ../../olsrd-plugins_0.9.0.3_mips.deb myhostname:/tmp/
 
 
 Ninux targeted customizations
