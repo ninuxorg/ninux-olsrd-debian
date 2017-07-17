@@ -73,7 +73,7 @@ Build the debian package from inside the debian qemu-mips64 virtual machine
 After launching the debian qemu-mips64 virtual machine as described above, install some build dependencies::
 
    apt-get update
-   apt-get install build-essential devscripts debhelper flex bison pkg-config
+   apt-get install build-essential devscripts debhelper flex bison pkg-config vim libgps-dev
   
 Download the olsrd tarball for which you want to build the debian package::
 
@@ -111,7 +111,7 @@ Edit the ``control`` file, if needed::
   
 Build the debian packages (from inside the debian directory)::
 
-   debuild -us -uc 
+   debuild -us -uc -b
 
 If the build is successful the .deb files will be in the parent directory.
 We can transfer them through scp::
